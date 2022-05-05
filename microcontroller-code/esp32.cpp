@@ -1,30 +1,25 @@
 // Import Library
 #include <LiquidCrystal.h>
-#include "WiFi.h"
+#include <WiFi.h>
 #include <PubSubClient.h>
 
 // Update these with values suitable for your network.
 
-const char* ssid = "Wokwi-GUEST";
-const char* password = "";
-const char* mqtt_server = "broker.mqttdashboard.com";
+const char *ssid = "Wokwi-GUEST";
+const char *password = "";
+const char *mqtt_server = "broker.mqttdashboard.com";
 int port = 1883;
+
 // Create a random client ID
 String clientId = String("CarSensor-1000") + String(random(0xffff), HEX);
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-long lastMsg = 0;
-char msg[50];
-int value = 0;
 
 // rs (LCD pin 4) to Arduino pin 5
-// rw (LCD pin 5) to Arduino pin 6
-// enable (LCD pin 6) to Arduino pin 7
-// LCD pins d4, d5, d6, d7 to Arduino pins 8, 9, 10, 11
+// enable (LCD pin 6) to Arduino pin 19
+// LCD pins d4, d5, d6, d7 to Arduino pins 13, 12, 14, 27
 LiquidCrystal lcd(5, 19, 13, 12, 14, 27);
-// LCD pin 15 to Arduino pin 4
-// int bl = 4;
 
 // Buzzer Positive to pin 1
 // Switch Common to pin 2
@@ -39,7 +34,8 @@ long oldDistance = 0;
 // All distance
 int stop = 70, should = 95, tclose = 150, closes = 200, gtclose = 300;
 
-void setup_wifi() {
+void setup_wifi()
+{
 
   delay(10);
   // We start by connecting to a WiFi network
@@ -49,7 +45,8 @@ void setup_wifi() {
 
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
     Serial.print(".");
   }
@@ -62,20 +59,25 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
-void reconnect() {
+void reconnect()
+{
   // Loop until we're reconnected
-  while (!client.connected()) {
+  while (!client.connected())
+  {
     Serial.print("Attempting MQTT connection...");
-
+    clientId = String("CarSensor-1000") + String(random(0xffff), HEX);
     // Attempt to connect
-    if (client.connect(clientId.c_str())) {
+    if (client.connect(clientId.c_str()))
+    {
       Serial.println("connected");
       // Once connected, publish an announcement...
       String text = clientId + String(" Join");
       client.publish("swood", text.c_str());
       // ... and resubscribe
       // client.subscribe("swood");
-    } else {
+    }
+    else
+    {
       Serial.print("failed, rc=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
@@ -93,9 +95,9 @@ void setup()
 
   // pinMode(bl, OUTPUT);
   // digitalWrite(bl, HIGH); // turn backlight on
-  lcd.begin(16, 2);       // use 16 col and 2 row
-  lcd.clear();            // start with a blank screen
-  lcd.display();          // Turn on the display:
+  lcd.begin(16, 2); // use 16 col and 2 row
+  lcd.clear();      // start with a blank screen
+  lcd.display();    // Turn on the display:
 
   setup_wifi();
   client.setServer(mqtt_server, port);
@@ -103,7 +105,8 @@ void setup()
 
 void loop()
 {
-  if (!client.connected()) {
+  if (!client.connected())
+  {
     reconnect();
   }
 
@@ -112,8 +115,8 @@ void loop()
   if (sw == HIGH)
   {
     long cm = sonar();
-    showText(cm);                                 // Display Distance num, text
-    beepSound(cm);                                // Beep Beep Sound up to distance
+    showText(cm);  // Display Distance num, text
+    beepSound(cm); // Beep Beep Sound up to distance
 
     showOffAlr = 0; // just set value to 0 for off state
   }
@@ -135,6 +138,8 @@ void loop()
 
 long sonar()
 {
+  // The HC-SR04 is triggered by a HIGH pulse of 2 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
   pinMode(trigPin, OUTPUT);
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -142,7 +147,7 @@ long sonar()
   delayMicroseconds(5);
   digitalWrite(trigPin, LOW);
 
-  return pulseIn(echoPin, HIGH) / 29 / 2;;
+  return pulseIn(echoPin, HIGH) / 29 / 2; // convert the time into a distance (cm)
 }
 
 void beepSound(long cm)
@@ -177,8 +182,10 @@ void showText(int cm)
       if (cm <= stop)
       {
         lcd.print("STOP!");
+        // Send to MQTT
         String text = clientId + String(" Crached");
         client.publish("swood", text.c_str());
+        Serial.println(text);
       }
       else if (cm <= should)
         lcd.print("SHOULD STOP");
