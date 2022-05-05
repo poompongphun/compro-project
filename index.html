@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Car Reverse Sensor</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Car Reverse Sensor</h1>
-</body>
+    <div id="message"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      const msgDiv = document.getElementById("message");
+      client = new Paho.MQTT.Client(
+        "broker.mqttdashboard.com",
+        Number(8000),
+        `clientId-${Date.now()}`
+      );
+      client.onConnectionLost = onConnectionLost;
+      client.onMessageArrived = onMessageArrived;
+
+      client.connect({ onSuccess: onConnect });
+
+      function onConnect() {
+        console.log("onConnect");
+        client.subscribe("swood");
+        message = new Paho.MQTT.Message("Hello MQTT");
+        message.destinationName = "swood";
+        client.send(message);
+      }
+
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+          console.log("onConnectionLost: " + responseObject.errorMessage);
+        }
+      }
+
+      function onMessageArrived(message) {
+        console.log("onMessageArrived: " + message.payloadString);
+        msgDiv.innerHTML += `<div class="message">${message.payloadString}</div>`;
+      }
+    </script>
+  </body>
 </html>
