@@ -1,0 +1,126 @@
+* {
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --bgColor: hsl(0, 0%, 100%);
+}
+body {
+  background-color: var(--bgColor);
+  font-family: "Prompt", sans-serif;
+}
+.navbar {
+  background-color: hsl(32, 16%, 63%);
+  transition: 0.2s all;
+}
+.active {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.navbar-brand {
+  font-weight: bold;
+}
+.icon {
+  --size: 40px;
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon a i {
+  font-size: 2rem !important;
+}
+.welcome {
+  height: 90vh;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    hsl(32, 16%, 63%) 0%,
+    hsl(28, 100%, 93%) 95%,
+    var(--bgColor) 100%
+  );
+}
+.welcome .row {
+  height: 100%;
+}
+
+.welcome #text {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+.welcome #text h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.welcome #demo-img {
+  width: 80%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0em 0.7em 2em #0002;
+  animation: rotate 0.5s linear infinite alternate;
+  transform-origin: center;
+}
+
+.message {
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 0em 0.7em 2em #0002;
+  margin: 20px auto;
+  position: relative;
+  overflow: auto;
+}
+
+.message .connection {
+  position: sticky;
+  background-color: hsl(233, 6%, 29%);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  color: white;
+  top: 0;
+}
+
+.message .connection .winaction {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.message .connection .circle {
+  --color: white;
+  width: 15px;
+  height: 15px;
+  background-color: var(--color);
+  margin: 2.5px;
+  border-radius: 50%;
+}
+.message .connection .signal {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.message .msg {
+  margin: 15px 10px;
+}
+.message .msg .name {
+  background-color: hsl(0, 0%, 90%);
+  border-radius: 50px;
+  padding: 5px 10px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(-0.5deg);
+  }
+  to {
+    transform: rotateZ(0.5deg);
+  }
+}
