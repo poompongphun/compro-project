@@ -14,12 +14,14 @@ client.connect({ onSuccess: onConnect });
 function onConnect() {
   console.log("onConnect");
   client.subscribe("swood");
-  message = new Paho.MQTT.Message(
-    `${clinetid} Hello this message is from my pc`
-  );
-  message.destinationName = "swood";
-  client.send(message);
-  statusDiv.innerHTML = `<i class="bi bi-wifi m-2" style="color:hsl(129, 59%, 49%)"></i><span class="signal" style="color:hsl(129, 59%, 49%)">Connected</span>`;
+  getIPs().then((res) => {
+    message = new Paho.MQTT.Message(
+      `${clinetid} Hello, I'm ${res.join('\n')}`
+    );
+    message.destinationName = "swood";
+    client.send(message);
+    statusDiv.innerHTML = `<i class="bi bi-wifi m-2" style="color:hsl(129, 59%, 49%)"></i><span class="signal" style="color:hsl(129, 59%, 49%)">Connected</span>`;
+  });
 }
 
 function onConnectionLost(responseObject) {
@@ -33,5 +35,7 @@ function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString);
   let [name, ...text] = message.payloadString.split(" ");
   text = text.join(" ");
-  msgDiv.innerHTML = `<div class="msg"><span class="name">${name}</span> <span class="text">${text}</span></div>` + msgDiv.innerHTML;
+  msgDiv.innerHTML =
+    `<div class="msg"><span class="name">${name}</span> <span class="text">${text}</span></div>` +
+    msgDiv.innerHTML;
 }
