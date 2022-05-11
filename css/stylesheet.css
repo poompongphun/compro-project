@@ -152,6 +152,10 @@ body {
 .docs .h3-content {
   margin: 0 20px;
 }
+pre {
+  border-radius: 10px;
+  margin-top: 10px;
+}
 
 @keyframes rotate {
   from {
