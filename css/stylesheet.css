@@ -132,6 +132,7 @@ body {
 }
 .docs .h2-content {
   margin: 0 20px;
+  word-wrap: break-word;
 }
 .docs .h2-content .img-content {
   width: 100%;
@@ -151,6 +152,7 @@ body {
 }
 .docs .h3-content {
   margin: 0 20px;
+  word-wrap: break-word;
 }
 pre {
   border-radius: 10px;
@@ -166,7 +168,7 @@ pre {
   }
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 767px) {
   .welcome {
     padding: 0px;
   }
@@ -175,5 +177,8 @@ pre {
   }
   .docs .h2-content .img-content {
     height: 300px;
+  }
+  .docs .h2-content, .docs .h3-content {
+    margin: 0 5px;
   }
 }
