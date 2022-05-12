@@ -13,6 +13,10 @@ Wokwi demo link (with wifi): [https://wokwi.com/projects/330841959706919507](htt
 
 ![Poster](/Poster/ComPro-Project.jpg "Poster")
 
+## Project Detail
+Car Reverse Sensor หรือ เซนเซอร์วัดระยะห่างของรถยนต์ สร้างขึ้นมาเพื่อใช้ในการถอยรถยนต์เพื่อเข้าจอด โดยใช้ ultrasonic distance sensor ซึ่งเป็นเซ็นเซอร์ที่ใช้สำหรับตรวจจับวัดถุต่างๆ โดยอาศัยหลักการสะท้อนของคลื่นความถี่เสียง คำนวณหาค่าระยะทางได้จากการเดินทางของคลื่นและนำมาเทียบกับเวลา ด้วยกลไกดังกล่าวทำให้สามารถนำมาประยุกต์ใช้งานในรูปแบบต่าง ๆ ได้อย่างมากมาย มาเป็นตัวควบคุมการทำงานของระบบ  โดยหากรถยนต์ได้ถอยมากระทบกับวัตถุบางอย่าง จะใช้สัญญาณ WiFi เพื่อส่งสัญญานเตือนผ่านหน้า Website เพื่อแจ้งเตือนให้ผู้ใช้งานได้ทราบ
+
 ## Usage Example Video
 Youtube: [https://www.youtube.com/embed/UqZsu2JbV_I](https://www.youtube.com/embed/UqZsu2JbV_I)
+
 [![Youtube VDO](https://cdn.discordapp.com/attachments/880736678954811413/974280048871878676/unknown.png "car reverse sensor")](https://www.youtube.com/embed/UqZsu2JbV_I)
