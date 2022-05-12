@@ -11,4 +11,8 @@ Wokwi demo link (with wifi): [https://wokwi.com/projects/330841959706919507](htt
 เป็นการศึกษาระบบการทำงานของ Microcontroller และ ใช้ในการตรวจเช็คระยะห่างของรถยนต์ในจุดที่ไม่สามารถมองเห็นได้ด้วยตา ส่งผลให้รับรู้ระยะห่างที่ไม่สามารถมองเห็นได้ โดยทั่วไปจะใช้ในการถอยรถยนต์เพื่อเข้าจอด เพื่อให้รับรู้ได้ถึงสิ่งที่จะมากระทบต่อรถยนต์ ขณะกำลังถอยรถยนต์
 โดยการทำงานของ Microcontroller จะสามารถรับคำสั่งได้ด้วยการเขียนโค้ดคำสั่งใน Wokwi.com ส่วนของอุปกรณ์ประกอบไปด้วย HC-SR04 (ultrasonic distance sensor), Buzzer, ESP-32 และมีการ Connect WiFi เพื่อส่งสัญญาณเตือนผ่านหน้า Website เมื่อรถชนขณะกำลังถอยหลัง เพื่อแจ้งเตือนในการชนอีกด้วย
 
-![Demo car reverse sensor](/Poster/ComPro-Project.jpg "car reverse sensor")
+![Poster](/Poster/ComPro-Project.jpg "Poster")
+
+## Usage Example Video
+Youtube: [https://www.youtube.com/embed/UqZsu2JbV_I](https://www.youtube.com/embed/UqZsu2JbV_I)
+[![Youtube VDO](https://cdn.discordapp.com/attachments/880736678954811413/974280048871878676/unknown.png "car reverse sensor")](https://www.youtube.com/embed/UqZsu2JbV_I)
